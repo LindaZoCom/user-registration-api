@@ -1,0 +1,123 @@
+{
+  "info": {
+    "name": "User Registration API — Testning, fortsättning",
+    "description": "Färdiga requests mot basprojektet user-registration-api. Importera denna fil i Postman (File > Import) och kör mot http://localhost:8080 medan appen är igång.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Skapa användare (201 Created)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"anna\",\n  \"email\": \"anna@test.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        },
+        "description": "Skapar en ny användare. Svarar 201 Created med den skapade användaren (inkl. genererat id) och Location-header /api/users/{id}."
+      }
+    },
+    {
+      "name": "Skapa användare — ogiltig data (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"\",\n  \"email\": \"inte-en-email\",\n  \"password\": \"kort\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        },
+        "description": "Tomt username, ogiltigt email-format och för kort lösenord (< 8 tecken) ska ge 400 Bad Request med felmeddelande."
+      }
+    },
+    {
+      "name": "Skapa användare — dubblett (409 Conflict)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"anna2\",\n  \"email\": \"anna@test.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        },
+        "description": "Kör detta EFTER 'Skapa användare (201)' med samma email — ska ge 409 Conflict eftersom email redan finns."
+      }
+    },
+    {
+      "name": "Lista alla användare",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        },
+        "description": "Returnerar alla registrerade användare som en JSON-lista. Tom lista [] om ingen användare skapats än."
+      }
+    },
+    {
+      "name": "Hämta användare via email",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/users?email=anna@test.com",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"],
+          "query": [
+            { "key": "email", "value": "anna@test.com" }
+          ]
+        },
+        "description": "Hittar en användare via email. 404 Not Found om ingen användare med den emailen finns."
+      }
+    },
+    {
+      "name": "Hämta användare via id",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/users/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "1"]
+        },
+        "description": "Byt ut '1' mot ett verkligt id (se svaret från 'Skapa användare' eller 'Lista alla användare'). 404 Not Found om id saknas."
+      }
+    },
+    {
+      "name": "Ta bort användare",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/users/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "1"]
+        },
+        "description": "Byt ut '1' mot ett verkligt id. Svarar 204 No Content vid lyckad borttagning."
+      }
+    }
+  ]
+}
