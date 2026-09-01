@@ -16,14 +16,15 @@
     <version>1.0.0</version>
     <name>user-registration-api</name>
     <description>
-        Basprojekt for kursen "Testning, fortsattning" (Jensen YH).
-        Ett fardigt, korrekt fungerande REST-API for anvandarregistrering.
-        Applikationskoden ar KOMPLETT - kursens fokus ligger pa att skriva
+        Basprojekt for kursen "Testning, fortsättning".
+        Ett färdigt, korrekt fungerande REST-API för anvandarregistrering.
+        Applikationskoden är KOMPLETT - kursens fokus ligger pa att skriva
         tester (enhet/komponent/integration) och CI/CD runt detta projekt.
     </description>
 
     <properties>
-        <java.version>17</java.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
