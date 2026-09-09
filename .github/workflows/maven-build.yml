@@ -19,7 +19,7 @@ jobs:
           java-version: '21'
 
       - name: Make Maven Wrapper Executable
-        run: chmod +x mvn
+        run: chmod +x ./mvnw
 
       - name: Build and test with Maven Wrapper
         run: ./mvnw clean install
