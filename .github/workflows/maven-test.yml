@@ -1,11 +1,10 @@
-name: Maven test
+name: Maven compile and test
 
 on:
   push:
-  pull_request:
 
 jobs:
-  test:
+  compile-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,5 +20,17 @@ jobs:
       - name: Make Maven Wrapper Executable
         run: chmod +x ./mvnw
 
-      - name: Rum tests with Maven Wrapper
+      - name: Compile application
+        run: ./mvnw compile
+
+      - name: Run tests
         run: ./mvnw test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: target/surefire-reports/
+
+
