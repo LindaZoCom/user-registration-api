@@ -18,5 +18,8 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Make Maven Wrapper Executable
+        run: chmod +x ./mvnw
+
       - name: Rum tests with Maven Wrapper
         run: ./mvnw test
