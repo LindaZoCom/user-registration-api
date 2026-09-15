@@ -4,7 +4,7 @@ Studenterna skapar sina egna workflow-filer här under kursens gång, i takt
 med Learnpoint-övningarna:
 
 - **Vecka 37** (`ovning-github-actions-intro-15` / `ovning-github-actions-unit-tests-16`):
-  `first-workflow.yml`, `pull-request-check.yml`, `maven-build.yml`
+  `first-workflow.yml.example`, `pull-request-check.yml.example`, `maven-build.yml.example`
 - **Vecka 38** (kompletterande material "GitHub Actions med villkor"):
   villkorad körning, jobbberoenden (`needs:`), `if:`-uttryck, matrix-builds
 - **Vecka 39** (CI/CD-veckan): en samlad pipeline som bygger, testar och
