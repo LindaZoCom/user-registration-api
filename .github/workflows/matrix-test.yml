@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix-runner}}
+    runs-on: ${{ matrix.runner}}
     strategy:
       fail-fast: false
       matrix:
@@ -26,13 +26,13 @@ jobs:
      - name: Gör Maven wrapper körbar
        run: chmod +x ./mvnw
 
-     - name: Kör tester på ${{ matrix-runner }}
+     - name: Kör tester på ${{ matrix.runner }}
        run: ./mvnw -B test
 
      - name: Ladda upp Surefire-rapporter
        if: always()
        uses: actions/upload-artifact@v4
        with:
-        name: surefire-reports-${{ matrix-runner }}
+        name: surefire-reports-${{ matrix.runner }}
         path: target/surefire-reports/
         if-no-files-found: warn
