@@ -27,5 +27,5 @@ jobs:
      - name: Gör Maven Wrapper körbar
        run: chmod +x ./mvnw
 
-     - name: Kör tester
+     - name: Kör projektets tester med Maven Wrapper
        run: ./mvnw -B test
