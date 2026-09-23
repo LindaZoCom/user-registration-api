@@ -1,0 +1,39 @@
+name: CI - user-registration-api
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Testa med Java 21
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Hämta koden
+       uses: actions/checkout@v4
+
+     - name: Sätt upp Java 21
+       uses: actions/setup-java@v5
+       with:
+         distribution: temurin
+         java-version: '21'
+         cache: maven
+
+     - name: Gör Maven Wrapper körbar
+       run: chmod +x ./mvnw
+
+     - name: Kör projektets tester med Maven Wrapper
+       run: ./mvnw -B test
+
+     - name: Ladda upp Surefire-rapporter
+       if: always()
+       uses: actions/upload-artifact@v4
+       with:
+         name: test-results
+         path: target/surefire-reports/
+         if-no-files-found: warn
