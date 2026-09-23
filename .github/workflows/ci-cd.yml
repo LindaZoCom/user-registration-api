@@ -85,7 +85,7 @@ jobs:
         run: |
           echo "Alla tester är godkända på main"
           echo "Simulerar deploy till staging"
-          ls-lh deploy
+          ls -lh deploy
           echo "En verklig deploy skulle använda miljöns säkra credentials"
     
 
